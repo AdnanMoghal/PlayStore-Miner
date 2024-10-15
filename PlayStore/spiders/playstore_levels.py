@@ -66,7 +66,7 @@ class PlaystoreLevelsSpider(scrapy.Spider):
         try:
             for url in first_page_urls:
                 self.driver.get(url)
-                # name = self.driver.find_element(By.XPATH, '//*[@id="yDmH0d"]/c-wiz[5]/div/div/div[2]/div[1]/div/div/c-wiz/div[2]/div[1]/div/h1').text
+                name = self.driver.find_element(By.XPATH, '//*[@id="yDmH0d"]/c-wiz[5]/div/div/div[2]/div[1]/div/div/c-wiz/div[2]/div[1]/div/h1').text
                 dev_details = self.driver.find_element(By.XPATH, '//*[@id="developer-contacts-heading"]/div[2]/button/i')
                 dev_details.click()
                 try:
@@ -74,14 +74,14 @@ class PlaystoreLevelsSpider(scrapy.Spider):
                     email = self.driver.find_element(By.XPATH, '//*[@id="developer-contacts"]/div/div[2]/div/a/div/div[2]').text
                 except NoSuchElementException:
                     pass
-                yield self.yield_elements(website, email)
+                yield self.yield_elements(name, website, email)
         except Exception:
             pass
         return self.driver.close()
 
-    def yield_elements(self, website, email):
+    def yield_elements(name, website, email):
         data = {
-            # 'name': name,
+            'name': name,
             'website': website,
             'email': email,
             # 'link': link

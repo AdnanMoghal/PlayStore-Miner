@@ -10,7 +10,7 @@ import scrapy
 from scrapy_selenium import SeleniumRequest
 
 class PlaystoreLevelsSpider(scrapy.Spider):
-    name = "playstore_levels"
+    name = "playstore_levels-old"
     # allowed_domains = ["https://play.google.com/store/apps"]
     # start_urls = ["https://playstore.com"]
 
