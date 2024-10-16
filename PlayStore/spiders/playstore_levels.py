@@ -12,12 +12,17 @@ from scrapy_selenium import SeleniumRequest
 
 class PlaystoreLevelsSpider(scrapy.Spider):
     name = "playstore_levels"
-    # allowed_domains = ["https://play.google.com/store/apps"]
-    # start_urls = ["https://playstore.com"]
+
+    # extra configuration
+    allowed_domains = ["https://play.google.com/store/apps"]
+    start_urls = ["https://playstore.com"]
 
     options = webdriver.ChromeOptions()
-    # options.binary_location = '/usr/bin/google-chrome'
-    # options.add_argument("headless")
+
+    # extra configuration
+    options.binary_location = '/usr/bin/google-chrome'
+    options.add_argument("headless")
+
     desired_capabilities = options.to_capabilities()
     driver = webdriver.Chrome(options=options)
     wait = 10
@@ -27,8 +32,7 @@ class PlaystoreLevelsSpider(scrapy.Spider):
         url = 'https://play.google.com'
         yield SeleniumRequest(url=url, callback=self.parse, wait_time=20)
 
-    custom_settings = {'FEED_URI': "files/test-file-%(time)s.csv",
-                       'FEED_FORMAT': 'csv'}
+    custom_settings = {'FEED_URI': "files/app-info-%(time)s.csv", 'FEED_FORMAT': 'csv'}
 
     xpath_string = None
 
